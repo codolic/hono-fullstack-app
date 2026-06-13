@@ -8,6 +8,12 @@ services:
       NODE_ENV: production
       PORT: 3000
       WEB_DIST_PATH: /app/apps/web/dist
+      DATABASE_URL: file:./data/dev.db
     ports:
       - "3000:3000"
+    volumes:
+      - sqlite-data:/app/data
     restart: unless-stopped
+
+volumes:
+  sqlite-data:

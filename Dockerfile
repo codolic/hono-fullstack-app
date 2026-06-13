@@ -30,12 +30,21 @@ FROM base AS runner
 ENV NODE_ENV="production"
 ENV PORT="3000"
 ENV WEB_DIST_PATH="/app/apps/web/dist"
+ENV DATABASE_URL="file:./data/dev.db"
 
+RUN mkdir -p /app/data
+
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/api/package.json ./apps/api/package.json
 COPY --from=builder /app/apps/api/dist ./apps/api/dist
 COPY --from=builder /app/apps/web/dist ./apps/web/dist
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/scripts ./scripts
 
 EXPOSE 3000
 
-CMD ["node", "apps/api/dist/production-server.js"]
+CMD ["sh", "-c", "node scripts/ensure-sqlite-db.mjs && pnpm prisma migrate deploy && node apps/api/dist/production-server.js"]

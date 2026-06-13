@@ -60,7 +60,7 @@ Prisma is configured in `prisma.config.ts`:
 - migrations path: `prisma/migrations`
 - datasource URL: `DATABASE_URL` from `.env`
 
-The current database URL is:
+The local database URL is:
 
 ```env
 DATABASE_URL="file:./dev.db"
@@ -104,6 +104,8 @@ Production Docker path:
 ```bash
 docker compose up --build
 ```
+
+The Docker image runs `prisma migrate deploy` before starting the production server. Compose sets `DATABASE_URL` to `file:./data/dev.db` and mounts a named `sqlite-data` volume at `/app/data`, so the SQLite database survives container recreation.
 
 ## Commit Checkpoints
 
