@@ -1,0 +1,30 @@
+{
+  "name": "@acme/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "lint": "tsc -b"
+  },
+  "dependencies": {
+    "@acme/shared": "workspace:*",
+    "@acme/ui": "workspace:*",
+    "@tanstack/react-router": "^1.141.2",
+    "@tanstack/react-query": "^5.95.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-react": "^5.1.2",
+    "lucide-react": "^0.561.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  }
+}

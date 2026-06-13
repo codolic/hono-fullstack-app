@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hono-fullstack-app:latest
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      WEB_DIST_PATH: /app/apps/web/dist
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
