@@ -8,11 +8,13 @@
     "start": "pnpm --filter @acme/api start",
     "prisma": "prisma",
     "prisma:format": "prisma format",
+    "prisma:migrate": "node scripts/ensure-sqlite-db.mjs && prisma migrate dev",
     "prisma:validate": "prisma validate",
     "typecheck": "turbo typecheck",
     "lint": "turbo lint"
   },
   "devDependencies": {
+    "dotenv": "^17.4.2",
     "prisma": "^7.8.0",
     "turbo": "^2.6.3",
     "typescript": "^5.9.3"
