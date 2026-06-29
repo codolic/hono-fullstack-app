@@ -3,12 +3,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        DATABASE_URL: ${DATABASE_URL:-file:./data/dev.db}
     image: hono-fullstack-app:latest
     environment:
       NODE_ENV: production
       PORT: 3000
       WEB_DIST_PATH: /app/apps/web/dist
-      DATABASE_URL: file:./data/dev.db
+      DATABASE_URL: ${DATABASE_URL:-file:./data/dev.db}
     ports:
       - "3000:3000"
     volumes:

@@ -63,7 +63,7 @@ Prisma is configured in `prisma.config.ts`:
 The local database URL is:
 
 ```env
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="file:./data/dev.db"
 ```
 
 The initial schema defines one test model:
@@ -105,7 +105,7 @@ Production Docker path:
 docker compose up --build
 ```
 
-The Docker image runs `prisma migrate deploy` before starting the production server. Compose sets `DATABASE_URL` to `file:./data/dev.db` and mounts a named `sqlite-data` volume at `/app/data`, so the SQLite database survives container recreation.
+The Docker image runs `prisma migrate deploy` before starting the production server. Compose passes `DATABASE_URL` to both the image build and runtime, defaulting to `file:./data/dev.db`, and mounts a named `sqlite-data` volume at `/app/data`, so the SQLite database survives container recreation. The API bundle inlines the local `@acme/shared` package so the production server does not need to execute workspace TypeScript source.
 
 ## Commit Checkpoints
 
